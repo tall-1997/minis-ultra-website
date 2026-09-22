@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#090a0c">
+  <title>Minis Ultra — 端侧私人 AI Agent</title>
+  <meta name="description" content="Minis Ultra 是 OpenMinis 的 Linux 沙箱 Android 分支。Ubuntu 24.04 PRoot、主机 su、多智能体，可与官方并排安装。当前 1.36.21-linux。">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Minis Ultra">
+  <meta property="og:title" content="Minis Ultra — 端侧私人 AI Agent">
+  <meta property="og:description" content="Minis Ultra 是 OpenMinis 的 Linux 沙箱 Android 分支。Ubuntu 24.04 PRoot、主机 su、多智能体，可与官方并排安装。当前 1.36.21-linux。">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Syne:wght@700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Syne:wght@700;800&display=swap"></noscript>
+  <link rel="preconnect" href="https://api.github.com" crossorigin>
+  <link rel="preconnect" href="https://img.shields.io" crossorigin>
+  <link rel="stylesheet" href="css/site.css?v=17">
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <a class="brand" href="index.html"><span data-ico="mark"></span>Minis Ultra</a>
+      <nav class="nav" id="site-nav">
+        <a href="index.html">首页</a>
+        <a href="compare.html">对比原版</a>
+        <a href="sandbox.html">沙箱</a>
+        <a href="download.html">下载</a>
+        <a href="changelog.html">版本</a>
+        <a href="notes.html">说明</a>
+        <a href="faq.html">问答</a>
+      </nav>
+      <div class="top-actions">
+<button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="site-nav"><span data-ico="menu"></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <p class="kicker">OpenMinis-Linux · Android arm64</p>
+        <h1>手机里的一台真 Linux，再接上最好的模型。</h1>
+        <p class="lede">Minis Ultra 是 OpenMinis 的 Linux 沙箱 Android 分支。启动器名称 Minis Ultra，包名 <code>com.openminis.linux</code>，可与官方 OpenMinis 并排安装。客户机是 Ubuntu 24.04，不是玩具终端。</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://github.com/tall-1997/OpenMinis-Linux/releases/download/1.36.21-linux/minis-ultra-com.openminis.linux.apk" data-role="dl"><span data-ico="download"></span><span>直接下载 APK</span></a>
+          <a class="btn btn-ghost" href="compare.html"><span data-ico="bolt"></span><span>与原版对比</span></a>
+        </div>
+        <div class="chips">
+          <span class="chip">ver <span data-live="version">1.36.21-linux</span></span>
+          <span class="chip">versionCode <span data-live="version-code">74</span></span>
+          <span class="chip">GPL-3.0</span>
+          <span class="chip">arm64-v8a</span>
+        </div>
+        <p class="live-line"><span class="dot" id="live-dot"></span><span id="live-source" data-live="source-text">…</span></p>
+      </div>
+      <div class="device" aria-hidden="true">
+        <div class="device-bar"><i></i><i></i><i></i></div>
+        <pre class="term"><span class="dim">root@minis:~#</span> <span class="cmd">cat /etc/os-release | head -2</span>
+<span class="out">NAME="Ubuntu"
+VERSION="24.04 LTS (Noble Numbat)"</span>
+<span class="dim">root@minis:~#</span> <span class="cmd">minis-dev-setup</span>
+<span class="out">bash gcc python3 git ffmpeg openjdk-21 …</span>
+<span class="dim">root@minis:~#</span> <span class="cmd">android-su status</span>
+<span class="out">host su: Magisk / KernelSU · ready</span></pre>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <div class="idx">01 — 定位</div>
+          <h2>端侧私人 Agent，沙箱即电脑。</h2>
+        </div>
+        <p class="note">把 Claude、GPT、Gemini 接到本机 Ubuntu：浏览器自动化、技能与记忆、多智能体调度。检查更新指向 fork <code>tall-1997/OpenMinis-Linux</code>。</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><span data-ico="linux"></span><h3>Ubuntu 24.04 客户机</h3><p>Canonical ubuntu-base arm64，跑在 PRoot 里。glibc、apt、bash。不是 KVM，也不依赖内核 user namespace。</p></article>
+        <article class="card"><span data-ico="su"></span><h3>主机 su 直通</h3><p>优先 Magisk / KernelSU；没有 su 时经 Shizuku 重试。设置里 Host su 与 Shizuku 并列。</p></article>
+        <article class="card"><span data-ico="coexist"></span><h3>与官方并排</h3><p>独立包名、启动器名、抽象套接字和调试端口。官方 Minis 不用卸，Ultra 可以一起装。</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <div class="idx">02 — 能力</div>
+          <h2>Agent 会用工具，也会调度团队。</h2>
+        </div>
+      </div>
+      <div class="grid-4">
+        <article class="card"><span data-ico="models"></span><h3>模型参数补全</h3><p>models.dev 归一化匹配，DataLearner 补洞，中转站脏名按字重合。缺参默认 256k / 128k / 思考 max / 文本。</p></article>
+        <article class="card"><span data-ico="swarm"></span><h3>多智能体</h3><p>主会话当协调者。并发 1–8、自定义协作角色、计划讨论。深链 minis://settings/multi-agent。</p></article>
+        <article class="card"><span data-ico="gate"></span><h3>SecurityGate</h3><p>ASK 默认、argv 风险、sha256 审计链。对话内审批卡；本会话全部允许会在会话结束复位。</p></article>
+        <article class="card"><span data-ico="skill"></span><h3>技能与人格</h3><p>启动扫描 minis-global/skills，默认全开。人格无字数上限。工作区规则作为 Markdown 文件库。</p></article>
+        <article class="card"><span data-ico="globe"></span><h3>浏览器自动化</h3><p>browser_use 跟系统 WebView。沙箱可 minis-open 调起主机浏览器。</p></article>
+        <article class="card"><span data-ico="clock"></span><h3>定时与插件</h3><p>cronjob、插件市场（MCP 预设 + OpenAPI，SSRF 校验，密钥不进模型上下文）。</p></article>
+        <article class="card"><span data-ico="disk"></span><h3>POSIX 存储</h3><p>有全部文件访问时挂 /sdcard。SAF 目录绑在 /var/minis/mounts/。</p></article>
+        <article class="card"><span data-ico="clamp"></span><h3>工具限额</h3><p>Shell 超时、file_read 字符/行数、子代理轮次。点 − / 数字 / + 中间可输入，确定时夹紧。</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <div class="idx">03 — 相对原版</div>
+          <h2>同一套 Agent，换了一台电脑。</h2>
+        </div>
+        <a class="btn btn-ghost" href="compare.html">完整对照表</a>
+      </div>
+      <div class="grid-2">
+        <article class="card"><h3>本分支 Minis Ultra</h3><p>启动器 Minis Ultra，包名 com.openminis.linux。Android 客户机 Ubuntu 24.04 glibc；aarch64 工具链打进 APK；发行走 GitHub Releases。</p></article>
+        <article class="card"><h3>官方 OpenMinis</h3><p>启动器 Minis，包名 com.openminis.app。iOS 用 iSH + Alpine；有 App Store 与官网 openminis.app。客户机偏 musl / Alpine 路径。</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-grid">
+      <div>
+        <strong style="color:var(--bone)">Minis Ultra</strong>
+        <p>OpenMinis 的 Linux 沙箱 Android 分支 · GPL-3.0</p>
+      </div>
+      <div>
+        <p><a href="https://github.com/tall-1997/OpenMinis-Linux">GitHub 仓库</a></p>
+        <p><a href="https://github.com/OpenMinis/OpenMinis">上游 OpenMinis</a></p>
+        <p><a href="https://openminis.app">openminis.app</a></p>
+      </div>
+      <div>
+        <p><a href="download.html">下载</a></p>
+        <p><a href="notes.html">发行说明</a></p>
+        <p><a href="sandbox.html">沙箱说明</a></p>
+      </div>
+    </div>
+  </footer>
+  <script src="js/config.js?v=17"></script>
+  <script src="js/api.js?v=17"></script>
+  <script src="js/downloads.js?v=17"></script>
+  <script src="js/site.js?v=17"></script>
+</body>
+</html>

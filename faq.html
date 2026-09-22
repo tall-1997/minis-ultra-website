@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#090a0c">
+  <title>问答 — Minis Ultra</title>
+  <meta name="description" content="Minis Ultra 安装、与官方共存、root、模型参数和更新渠道的常见问题。">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Minis Ultra">
+  <meta property="og:title" content="问答 — Minis Ultra">
+  <meta property="og:description" content="Minis Ultra 安装、与官方共存、root、模型参数和更新渠道的常见问题。">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Syne:wght@700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Syne:wght@700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="css/site.css?v=17">
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <a class="brand" href="index.html"><span data-ico="mark"></span>Minis Ultra</a>
+      <nav class="nav" id="site-nav">
+        <a href="index.html">首页</a>
+        <a href="compare.html">对比原版</a>
+        <a href="sandbox.html">沙箱</a>
+        <a href="download.html">下载</a>
+        <a href="changelog.html">版本</a>
+        <a href="notes.html">说明</a>
+        <a href="faq.html">问答</a>
+      </nav>
+      <div class="top-actions">
+<button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="site-nav"><span data-ico="menu"></span></button>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="page-hero">
+      <p class="kicker">FAQ</p>
+      <h1>先把会装错的事说清楚。</h1>
+    </section>
+    <section class="section faq">
+      <details open>
+        <summary>这是官方 OpenMinis 吗？</summary>
+        <p>不是。这是 GPL-3.0 fork，启动器叫 Minis Ultra。官方产品与网站仍是 <a href="https://openminis.app">openminis.app</a>。</p>
+      </details>
+      <details>
+        <summary>能和官方 App 一起装吗？</summary>
+        <p>能。包名不同：官方 com.openminis.app，本分支 com.openminis.linux。签名也不同，不能互相覆盖。</p>
+      </details>
+      <details>
+        <summary>必须 root 吗？</summary>
+        <p>不必。沙箱本身用 PRoot。主机 su 只在你要驱动 Magisk/KernelSU 时才需要；否则 Agent 仍可在客户机里跑 apt 与脚本。</p>
+      </details>
+      <details>
+        <summary>沙箱 root 等于手机 root 吗？</summary>
+        <p>不等于。PRoot 假装 uid 0。真主机权限走 android-su / su。</p>
+      </details>
+      <details>
+        <summary>中转站模型为什么上下文是 256k？</summary>
+        <p>接口往往只给 id。本分支用 models.dev 与 DataLearner 补参数；仍空的字段默认 256k 上下文、128k 输出、开启思考（最高 max）、文本模态。目录或你手改的值优先。</p>
+      </details>
+      <details>
+        <summary>如何检查更新？</summary>
+        <p>应用内关于页指向本 fork。滚动包标签是 android-latest。不要去官方商店找 Minis Ultra。</p>
+      </details>
+      <details>
+        <summary>为什么 APK 很大、首次很慢？</summary>
+        <p>内含 Ubuntu rootfs 与 aarch64 工具。第一次启动要解压客户机。</p>
+      </details>
+      <details>
+        <summary>x86 模拟器能装吗？</summary>
+        <p>发行包是 arm64-v8a。x86_64 模拟器通常不行。</p>
+      </details>
+      <details>
+        <summary>源码在哪？</summary>
+        <p><a href="https://github.com/tall-1997/OpenMinis-Linux">github.com/tall-1997/OpenMinis-Linux</a>。上游 <a href="https://github.com/OpenMinis/OpenMinis">OpenMinis/OpenMinis</a>。</p>
+      </details>
+    </section>
+  </main>
+  <footer class="foot"><div class="wrap"><p>GPL-3.0 · 以仓库文档为准</p></div></footer>
+  <script src="js/site.js?v=17"></script>
+</body>
+</html>

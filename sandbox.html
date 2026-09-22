@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#090a0c">
+  <title>Linux 沙箱 — Minis Ultra</title>
+  <meta name="description" content="Minis Ultra 的 Ubuntu 24.04 PRoot 客户机、主机 su、POSIX 挂载与 minis-* 工具。">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Minis Ultra">
+  <meta property="og:title" content="Linux 沙箱 — Minis Ultra">
+  <meta property="og:description" content="Minis Ultra 的 Ubuntu 24.04 PRoot 客户机、主机 su、POSIX 挂载与 minis-* 工具。">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Syne:wght@700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Syne:wght@700;800&display=swap"></noscript>
+  <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
+  <link rel="stylesheet" href="css/site.css?v=17">
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <a class="brand" href="index.html"><span data-ico="mark"></span>Minis Ultra</a>
+      <nav class="nav" id="site-nav">
+        <a href="index.html">首页</a>
+        <a href="compare.html">对比原版</a>
+        <a href="sandbox.html">沙箱</a>
+        <a href="download.html">下载</a>
+        <a href="changelog.html">版本</a>
+        <a href="notes.html">说明</a>
+        <a href="faq.html">问答</a>
+      </nav>
+      <div class="top-actions">
+<button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="site-nav"><span data-ico="menu"></span></button>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="page-hero">
+      <p class="kicker">沙箱</p>
+      <h1>客户机里假装 uid 0，主机 root 另走 su。</h1>
+      <p class="lede">PRoot 会在 Ubuntu 里假装 root，那不是手机 root。真主机权限只来自 Magisk / KernelSU 的卸载通道，或 Shizuku 回落。</p>
+    </section>
+    <section class="section">
+      <div class="grid-2">
+        <article class="card"><span data-ico="ubuntu"></span><h3>客户机规格</h3><p>libc：glibc aarch64-linux-gnu<br>shell：GNU bash，/bin/sh 是 dash<br>软件包：apt（yum/dnf 只是包装）<br>软件源：ports.ubuntu.com<br>init：无 systemd</p></article>
+        <article class="card"><span data-ico="linux"></span><h3>工具链</h3><p><code>minis-dev-setup</code> 安装 bash、gcc、python3、git、ffmpeg、openjdk-21、gradle、golang-go。<code>minis-android-sdk-setup</code> 配 aarch64 aapt2 与平台。</p></article>
+      </div>
+      <p class="warn" style="margin-top:20px">不要在客户机里用 sdkmanager 装 Google 的 linux x86_64 build-tools / cmake / ndk。那会把 aapt2 覆盖成无法执行的 ELF。</p>
+    </section>
+    <section class="section">
+      <div class="section-head"><div><div class="idx">主机通道</div><h2>沙箱当服务器。</h2></div></div>
+      <div class="device">
+        <div class="device-bar"><i></i><i></i><i></i></div>
+        <pre class="term"><span class="cmd">minis-toast 备份完成</span>
+<span class="cmd">minis-clipboard get</span>
+<span class="cmd">minis-open --system https://example.com</span>
+<span class="cmd">minis-firewall set wifi-only</span>
+<span class="cmd">minis-firewall cut</span>
+<span class="cmd">minis-notify post --title 完成 --body ok</span>
+<span class="cmd">minis-on-event register battery_low /var/minis/hooks/pause.sh</span>
+<span class="cmd">android-su status</span>
+<span class="dim"># status files</span>
+<span class="cmd">cat /run/minis-host-status.json</span>
+<span class="cmd">cat /run/android-events.jsonl</span></pre>
+      </div>
+    </section>
+    <section class="section">
+      <div class="grid-3">
+        <article class="card"><span data-ico="disk"></span><h3>共享存储</h3><p>SAF 绑定 /var/minis/mounts/&lt;name&gt;/。有全部文件访问时还有 /sdcard 与 /storage/emulated/0。</p></article>
+        <article class="card"><span data-ico="su"></span><h3>Host su</h3><p>深链 minis://settings/host-su。su -c id 与 android-su status 用于确认。</p></article>
+        <article class="card"><span data-ico="parallel"></span><h3>多智能体</h3><p>主会话拆解分派。子代理看不到主会话，prompt 必须自包含，禁止再开子代理。</p></article>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section-head"><div><div class="idx">仓库原文</div><h2>LINUX.md</h2></div></div>
+      <div id="linux-doc" class="note-ver prose"><p class="note">正在拉取 LINUX.md…</p></div>
+    </section>
+  </main>
+  <footer class="foot">
+    <div class="wrap"><p>细节以仓库 LINUX.md 为准（本页实时拉取）。</p></div>
+  </footer>
+  <script src="js/config.js?v=17"></script>
+  <script src="js/api.js?v=17"></script>
+  <script src="js/md.js?v=17"></script>
+  <script src="js/docs.js?v=17"></script>
+  <script src="js/site.js?v=17"></script>
+</body>
+</html>

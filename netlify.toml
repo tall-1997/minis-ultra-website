@@ -1,0 +1,10 @@
+[build]
+  publish = "."
+
+# 纯静态站点，无构建命令；404.html 由 Netlify 自动识别
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#090a0c">
+  <title>与官方 OpenMinis 对比 — Minis Ultra</title>
+  <meta name="description" content="Minis Ultra 与官方 OpenMinis 在包名、客户机、工具链、发行渠道和模型补全上的差异。">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Minis Ultra">
+  <meta property="og:title" content="与官方 OpenMinis 对比 — Minis Ultra">
+  <meta property="og:description" content="Minis Ultra 与官方 OpenMinis 在包名、客户机、工具链、发行渠道和模型补全上的差异。">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Syne:wght@700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Syne:wght@700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="css/site.css?v=17">
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <a class="brand" href="index.html"><span data-ico="mark"></span>Minis Ultra</a>
+      <nav class="nav" id="site-nav">
+        <a href="index.html">首页</a>
+        <a href="compare.html">对比原版</a>
+        <a href="sandbox.html">沙箱</a>
+        <a href="download.html">下载</a>
+        <a href="changelog.html">版本</a>
+        <a href="notes.html">说明</a>
+        <a href="faq.html">问答</a>
+      </nav>
+      <div class="top-actions">
+<button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="site-nav"><span data-ico="menu"></span></button>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="page-hero compare-hero">
+      <p class="kicker">Minis Ultra · 优先看本分支</p>
+      <h1>先看 Minis Ultra，再看差异。</h1>
+      <p class="lede">同一套 Agent 能力，Minis Ultra 把 Android 客户机换成 Ubuntu 24.04，并加上主机 su、独立包名和 Linux 工具链。官方 OpenMinis 放在右侧作为参照。</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="download.html"><span data-ico="download"></span><span>下载 Minis Ultra</span></a>
+        <a class="btn btn-ghost" href="#comparison"><span data-ico="bolt"></span><span>查看逐项差异</span></a>
+      </div>
+    </section>
+    <section class="section compare-focus">
+      <div class="section-head">
+        <div>
+          <div class="idx">01 — Minis Ultra</div>
+          <h2>这不是换皮，是换了一台电脑。</h2>
+        </div>
+        <p class="note">本分支的关键变化先列在这里，官方产品只在下方用于逐项参照。</p>
+      </div>
+      <div class="focus-grid">
+        <article class="focus-card focus-card-main"><span class="focus-number">01</span><h3>Ubuntu 24.04 客户机</h3><p>arm64 · glibc · apt · PRoot。手机里的客户机按 Linux 工作流运行，而不是只提供一个轻量终端。</p><code>files/ubuntu-rootfs</code></article>
+        <article class="focus-card"><span class="focus-number">02</span><h3>主机 su 通道</h3><p>优先 Magisk / KernelSU，必要时回落 Shizuku。Host su 与沙箱终端直接联动。</p><code>android-su status</code></article>
+        <article class="focus-card"><span class="focus-number">03</span><h3>独立安装与工具链</h3><p>独立包名、启动器名、套接字和调试端口，可与官方 OpenMinis 并排安装。</p><code>com.openminis.linux</code></article>
+        <article class="focus-card"><span class="focus-number">04</span><h3>模型目录补全</h3><p>归一化、DataLearner 和按字重合，补上上下文、输出与思考参数缺口。</p><code>256k / 128k / thinking max</code></article>
+      </div>
+    </section>
+    <section class="section" id="comparison">
+      <div class="section-head">
+        <div>
+          <div class="idx">02 — 逐项对照</div>
+          <h2>Minis Ultra 在左，官方在右。</h2>
+        </div>
+        <div class="cmp-legend" aria-label="对照列说明">
+          <span class="cmp-pill cmp-pill-us">Minis Ultra · 本仓库</span>
+          <span class="cmp-pill cmp-pill-them">官方 OpenMinis</span>
+        </div>
+      </div>
+      <div class="cmp-list">
+        <article class="cmp-row">
+          <h3>客户机</h3>
+          <div class="cmp-cols">
+            <div class="cmp-cell cmp-us"><span class="cmp-label">Minis Ultra</span><p>Ubuntu 24.04 noble arm64 · glibc · apt · PRoot</p></div>
+            <div class="cmp-cell cmp-them"><span class="cmp-label">官方</span><p>iOS：iSH + Alpine musl；Android 接近官方基线</p></div>
+          </div>
+        </article>
+        <article class="cmp-row">
+          <h3>主机 root</h3>
+          <div class="cmp-cols">
+            <div class="cmp-cell cmp-us"><span class="cmp-label">Minis Ultra</span><p>Magisk / KernelSU su，可回落 Shizuku</p></div>
+            <div class="cmp-cell cmp-them"><span class="cmp-label">官方</span><p>视官方实现</p></div>
+          </div>
+        </article>
+        <article class="cmp-row">
+          <h3>共享存储</h3>
+          <div class="cmp-cols">
+            <div class="cmp-cell cmp-us"><span class="cmp-label">Minis Ultra</span><p>全部文件访问时 POSIX /sdcard</p></div>
+            <div class="cmp-cell cmp-them"><span class="cmp-label">官方</span><p>官方 SAF / 文档目录</p></div>
+          </div>
+        </article>
+        <article class="cmp-row">
+          <h3>开发工具链</h3>
+          <div class="cmp-cols">
+            <div class="cmp-cell cmp-us"><span class="cmp-label">Minis Ultra</span><p>minis-dev-setup + aarch64 aapt2 / NDK 打进 APK</p></div>
+            <div class="cmp-cell cmp-them"><span class="cmp-label">官方</span><p>沙箱内通用包</p></div>
+          </div>
+        </article>
+        <article class="cmp-row">
+          <h3>模型目录补全</h3>
+          <div class="cmp-cols">
+            <div class="cmp-cell cmp-us"><span class="cmp-label">Minis Ultra</span><p>归一化 + DataLearner + 脏名按字；缺参 256k/128k/思考 max</p></div>
+            <div class="cmp-cell cmp-them"><span class="cmp-label">官方</span><p>上游逻辑</p></div>
+          </div>
+        </article>
+        <article class="cmp-row">
+          <h3>多智能体限额 UI</h3>
+          <div class="cmp-cols">
+            <div class="cmp-cell cmp-us"><span class="cmp-label">Minis Ultra</span><p>点数字输入，确定时 min/max 夹紧</p></div>
+            <div class="cmp-cell cmp-them"><span class="cmp-label">官方</span><p>视官方版本</p></div>
+          </div>
+        </article>
+        <article class="cmp-row">
+          <h3>并排安装</h3>
+          <div class="cmp-cols">
+            <div class="cmp-cell cmp-us"><span class="cmp-label">Minis Ultra</span><p>可以，数据互不覆盖</p></div>
+            <div class="cmp-cell cmp-them"><span class="cmp-label">官方</span><p>—</p></div>
+          </div>
+        </article>
+        <article class="cmp-row">
+          <h3>Rootfs 目录</h3>
+          <div class="cmp-cols">
+            <div class="cmp-cell cmp-us"><span class="cmp-label">Minis Ultra</span><p><code>files/ubuntu-rootfs</code></p></div>
+            <div class="cmp-cell cmp-them"><span class="cmp-label">官方</span><p><code>files/alpine-rootfs</code></p></div>
+          </div>
+        </article>
+        <article class="cmp-row">
+          <h3>抽象套接字</h3>
+          <div class="cmp-cols">
+            <div class="cmp-cell cmp-us"><span class="cmp-label">Minis Ultra</span><p><code>native-offload-linux</code></p></div>
+            <div class="cmp-cell cmp-them"><span class="cmp-label">官方</span><p><code>native-offload</code></p></div>
+          </div>
+        </article>
+        <article class="cmp-row">
+          <h3>Debug JSON-RPC</h3>
+          <div class="cmp-cols">
+            <div class="cmp-cell cmp-us"><span class="cmp-label">Minis Ultra</span><p><code>127.0.0.1:5322</code></p></div>
+            <div class="cmp-cell cmp-them"><span class="cmp-label">官方</span><p><code>127.0.0.1:5321</code></p></div>
+          </div>
+        </article>
+        <article class="cmp-row">
+          <h3>启动器名称</h3>
+          <div class="cmp-cols">
+            <div class="cmp-cell cmp-us"><span class="cmp-label">Minis Ultra</span><p>Minis Ultra</p></div>
+            <div class="cmp-cell cmp-them"><span class="cmp-label">官方</span><p>Minis</p></div>
+          </div>
+        </article>
+        <article class="cmp-row">
+          <h3>applicationId</h3>
+          <div class="cmp-cols">
+            <div class="cmp-cell cmp-us"><span class="cmp-label">Minis Ultra</span><p><code>com.openminis.linux</code></p></div>
+            <div class="cmp-cell cmp-them"><span class="cmp-label">官方</span><p><code>com.openminis.app</code></p></div>
+          </div>
+        </article>
+        <article class="cmp-row">
+          <h3>平台重心</h3>
+          <div class="cmp-cols">
+            <div class="cmp-cell cmp-us"><span class="cmp-label">Minis Ultra</span><p>Android arm64 分支 · GitHub Releases</p></div>
+            <div class="cmp-cell cmp-them"><span class="cmp-label">官方</span><p>iOS + Android · 官网 / App Store</p></div>
+          </div>
+        </article>
+        <article class="cmp-row">
+          <h3>检查更新</h3>
+          <div class="cmp-cols">
+            <div class="cmp-cell cmp-us"><span class="cmp-label">Minis Ultra</span><p>fork tall-1997/OpenMinis-Linux</p></div>
+            <div class="cmp-cell cmp-them"><span class="cmp-label">官方</span><p>openminis.app / 官方仓库</p></div>
+          </div>
+        </article>
+        <article class="cmp-row">
+          <h3>签名</h3>
+          <div class="cmp-cols">
+            <div class="cmp-cell cmp-us"><span class="cmp-label">Minis Ultra</span><p>本分支独立 release 签名</p></div>
+            <div class="cmp-cell cmp-them"><span class="cmp-label">官方</span><p>官方证书</p></div>
+          </div>
+        </article>
+        <article class="cmp-row">
+          <h3>许可证</h3>
+          <div class="cmp-cols">
+            <div class="cmp-cell cmp-us"><span class="cmp-label">Minis Ultra</span><p>GPL-3.0</p></div>
+            <div class="cmp-cell cmp-them"><span class="cmp-label">官方</span><p>GPL-3.0</p></div>
+          </div>
+        </article>
+      </div>
+      <p class="note" style="margin-top:18px">官方产品优势在 iOS、商店分发与品牌站点。本分支优势在 Android 上的真 Ubuntu、主机通道和中转站模型体验。不是「谁更全」，是两条安装路径。</p>
+    </section>
+  </main>
+  <footer class="foot">
+    <div class="wrap foot-grid">
+      <div><strong style="color:var(--bone)">Minis Ultra</strong><p>OpenMinis 的 Linux 沙箱 Android 分支 · GPL-3.0</p></div>
+      <div><p><a href="https://github.com/OpenMinis/OpenMinis">上游仓库</a></p><p><a href="https://openminis.app">openminis.app</a></p></div>
+      <div><p><a href="download.html">下载</a></p></div>
+    </div>
+  </footer>
+  <script src="js/site.js?v=17"></script>
+</body>
+</html>

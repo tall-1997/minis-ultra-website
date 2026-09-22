@@ -2,6 +2,11 @@
 
 纯 HTML / CSS / JS，无构建步骤。图标为站点自制 SVG（`js/site.js` 注入）。
 
+## 线上地址
+
+GitHub Pages（推送到 `main` 由 `.github/workflows/pages.yml` 自动部署）：
+**https://tall-1997.github.io/minis-ultra-website/**
+
 ## 本地预览
 
 用任意静态服务器打开本项目目录，例如：
